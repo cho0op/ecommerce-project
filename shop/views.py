@@ -1,7 +1,37 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, get_user_model
 from .forms import ContactForm, LoginForm, RegisterForm
+from django.views.generic.list import ListView
+from .models import Product
 
+class ProductListView(ListView):
+    queryset = Product.objects.all()
+    template_name = 'shop/product_list.html'
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(ProductListView, self).get_context_data(**kwargs)
+    #     return context
+
+def product_list_view(request):
+    queryset = Product.objects.all()
+    context={
+        'object_list':queryset
+    }
+    return render(request, 'shop/product_list.html', context)
+
+class ProductDetailView(ListView):
+    queryset = Product.objects.all()
+    template_name = 'shop/detail_list.html'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductDetailView, self).get_context_data( **kwargs)
+        print(context)
+        return context
+
+def product_detail_view(request,product_id):
+    instance =  get_object_or_404(Product, pk=product_id)
+    context={
+        'object' : instance
+    }
+    return render(request, 'shop/detail_list.html', context)
 
 def home_page(request):
     context={}
