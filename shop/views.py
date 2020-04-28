@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, Http404
 from django.contrib.auth import authenticate, login, get_user_model
 from .forms import ContactForm, LoginForm, RegisterForm
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 from .models import Product
 
 class ProductListView(ListView):
@@ -18,18 +18,44 @@ def product_list_view(request):
     }
     return render(request, 'shop/product_list.html', context)
 
-class ProductDetailView(ListView):
+class ProductDetailSlugView(DetailView):
+    template_name = 'shop/detail_list.html'
+    queryset = Product.objects.all()
+    def get_object(self, instance=None):
+            request = self.request
+            slug = self.kwargs.get('slug')
+            try:
+                instance = Product.objects.get(Product, slug=slug)
+            except Product.DoesNotExist:
+                raise Http404("not found...")
+            except Product.MultipleObjectsReturned:
+                qs= Product.objects.filter(slug=slug)
+                instance =  qs.first()
+            return instance
+
+class ProductDetailView(DetailView):
     queryset = Product.objects.all()
     template_name = 'shop/detail_list.html'
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductDetailView, self).get_context_data( **kwargs)
         print(context)
         return context
+    # def get_object(self):
+    #     request = self.request
+    #     product_id = self.kwargs.get('product_id')
+    #     instance = Product.objects.get_by_id(product_id)
+    #     if instance is None:
+    #         raise Http404("product doesn't exist")
+    #     return instance
 
 def product_detail_view(request,product_id):
-    instance =  get_object_or_404(Product, pk=product_id)
+    # instance =  get_object_or_404(Product, pk=product_id)
+    istance = Product.objects.get_by_id(product_id)
+    if  istance is None:
+        raise Http404("product doesn't exist")
+
     context={
-        'object' : instance
+        'object' : istance
     }
     return render(request, 'shop/detail_list.html', context)
 
@@ -69,3 +95,16 @@ def register_page(request):
         email=form.cleaned_data.get('email')
         new_user=User.objects.create_user(username, email, password)
     return render(request, "shop/auth/register.html", {"form":form})
+
+class ProductFeaturedListView(ListView):
+    template_name = 'shop/product_list.html'
+    def get_queryset(self):
+        request=self.request
+        return Product.objects.featured()
+
+
+
+class ProductFeaturedDetailView(DetailView):
+    template_name = 'shop/featured-detail.html'
+    queryset = Product.objects.featured()
+
