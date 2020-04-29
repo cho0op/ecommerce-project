@@ -31,12 +31,15 @@ def upload_image_path(instance, filename):
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, unique=True)
     desctiption = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=5)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     objects = ProductManager()
     featured = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return '/products/{pk}/'.format(pk=self.pk)
 
     def __str__(self):
         return self.title

@@ -5,9 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/featured-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/featured-detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,9 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -94,7 +94,9 @@
       <workItem from="1587861471482" duration="59000" />
       <workItem from="1587892507371" duration="7501000" />
       <workItem from="1587982190761" duration="1430000" />
-      <workItem from="1588063950755" duration="12176000" />
+      <workItem from="1588063950755" duration="12317000" />
+      <workItem from="1588149622502" duration="4762000" />
+      <workItem from="1588162453178" duration="1092000" />
     </task>
     <servers />
   </component>

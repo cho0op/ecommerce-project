@@ -10,7 +10,9 @@
 {{ object.desctiption }}
 <br>
 {% if object.image %}
-<img src="{{ object.image.url }}" class="image-fluid">
+    <a href="{{  object.get_absolute_utl }}">
+        <img src="{{ object.image.url }}" class="image-fluid">
+    </a>
 {% endif %}
 </body>
 </html>

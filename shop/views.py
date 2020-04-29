@@ -21,41 +21,22 @@ def product_list_view(request):
 class ProductDetailSlugView(DetailView):
     template_name = 'shop/detail_list.html'
     queryset = Product.objects.all()
-    def get_object(self, instance=None):
-            request = self.request
-            slug = self.kwargs.get('slug')
-            try:
-                instance = Product.objects.get(Product, slug=slug)
-            except Product.DoesNotExist:
-                raise Http404("not found...")
-            except Product.MultipleObjectsReturned:
-                qs= Product.objects.filter(slug=slug)
-                instance =  qs.first()
-            return instance
 
 class ProductDetailView(DetailView):
     queryset = Product.objects.all()
     template_name = 'shop/detail_list.html'
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductDetailView, self).get_context_data( **kwargs)
-        print(context)
         return context
-    # def get_object(self):
-    #     request = self.request
-    #     product_id = self.kwargs.get('product_id')
-    #     instance = Product.objects.get_by_id(product_id)
-    #     if instance is None:
-    #         raise Http404("product doesn't exist")
-    #     return instance
+
 
 def product_detail_view(request,product_id):
     # instance =  get_object_or_404(Product, pk=product_id)
-    istance = Product.objects.get_by_id(product_id)
-    if  istance is None:
+    instance = Product.objects.get_by_id(product_id)
+    if  instance is None:
         raise Http404("product doesn't exist")
-
     context={
-        'object' : istance
+        'object' : instance
     }
     return render(request, 'shop/detail_list.html', context)
 
