@@ -1,4 +1,7 @@
 from django.db import models
+from django.urls import reverse
+from .utils import unique_slug_generator
+from django.db.models.signals import pre_save, post_save
 import os, random
 
 def get_filename_ext(filepath):
@@ -31,7 +34,7 @@ def upload_image_path(instance, filename):
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
     desctiption = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=5)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
@@ -40,4 +43,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('slug_detail', kwargs={'slug': self.slug})
+def product_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug=unique_slug_generator(instance)
+pre_save.connect(product_pre_save_receiver, sender=Product)
 # Create your models here.

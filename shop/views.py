@@ -19,19 +19,13 @@ def product_list_view(request):
     return render(request, 'shop/product_list.html', context)
 
 class ProductDetailSlugView(DetailView):
+    model = Product
     template_name = 'shop/detail_list.html'
-    queryset = Product.objects.all()
-    def get_object(self, instance=None):
-            request = self.request
-            slug = self.kwargs.get('slug')
-            try:
-                instance = Product.objects.get(Product, slug=slug)
-            except Product.DoesNotExist:
-                raise Http404("not found...")
-            except Product.MultipleObjectsReturned:
-                qs= Product.objects.filter(slug=slug)
-                instance =  qs.first()
-            return instance
+    def get_object(self,*args, **kwargs):
+        request = self.request
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        return instance
 
 class ProductDetailView(DetailView):
     queryset = Product.objects.all()
@@ -101,7 +95,6 @@ class ProductFeaturedListView(ListView):
     def get_queryset(self):
         request=self.request
         return Product.objects.featured()
-
 
 
 class ProductFeaturedDetailView(DetailView):
