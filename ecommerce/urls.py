@@ -20,9 +20,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('shop.urls')),
+    path('products/', include('shop.urls', namespace='products')),
     path('',views.home_page, name="home_page"),
     path('contact/', views.contact_page),
     # path('login/', views.login_page, name="login_page"),

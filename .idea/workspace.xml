@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1fe087fb-7f0d-4cdf-9fa3-d95428e588e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base/base.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/contact_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/contact_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/snippets/card.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/snippets/card.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
