@@ -35,7 +35,7 @@ def upload_image_path(instance, filename):
 class Product(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(blank=True, null=True, unique=True)
-    desctiption = models.TextField()
+    description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=5)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     objects = ProductManager()
@@ -45,7 +45,7 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('slug_detail', kwargs={'slug': self.slug})
+        return reverse('detail', kwargs={'slug': self.slug})
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug=unique_slug_generator(instance)

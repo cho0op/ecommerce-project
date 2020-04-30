@@ -6,8 +6,13 @@
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base/base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/contact_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/contact_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/templates/shop/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -39,8 +44,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\ecommerce-project\shop" />
       <recent name="D:\ecommerce-project\shop\templates\shop" />
+      <recent name="D:\ecommerce-project\shop\templates\snippets" />
+      <recent name="D:\ecommerce-project\shop" />
     </key>
   </component>
   <component name="RunDashboard">

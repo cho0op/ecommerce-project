@@ -23,8 +23,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('shop.urls')),
-    # path('',views.home_page, name="home_page"),
-    # path('contact/', views.contact_page),
+    path('',views.home_page, name="home_page"),
+    path('contact/', views.contact_page),
     # path('login/', views.login_page, name="login_page"),
     # path('register/', views.register_page, name="register_page"),
     # path('featured/', views.ProductFeaturedListView.as_view()),
