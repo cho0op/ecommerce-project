@@ -40,6 +40,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     objects = ProductManager()
     featured = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

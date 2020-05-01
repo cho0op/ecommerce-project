@@ -24,10 +24,10 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('shop.urls', namespace='products')),
-    path('',views.home_page, name="home_page"),
-    path('contact/', views.contact_page),
-    # path('login/', views.login_page, name="login_page"),
-    # path('register/', views.register_page, name="register_page"),
+    path('',views.home_page, name="home"),
+    path('contact/', views.contact_page, name="contacts"),
+    path('login/', views.login_page, name="login"),
+    path('register/', views.register_page, name="register"),
     # path('featured/', views.ProductFeaturedListView.as_view()),
     # path('featured/<int:pk>/', views.ProductFeaturedDetailView.as_view()),
     # #products

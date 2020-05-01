@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{{ object.title }}
-<br>
-{{ object.description }}
-<br>
-{% if object.image %}
-<img src="{{ object.image.url }}" class="image-fluid">
-{% endif %}
-</body>
-</html>
+{% extends 'shop/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ object.title }}</h1>
+                {{ object.timestamp|time }}
+                {{ object.description|linebreaks }}
+                <br>
+                {% if object.image %}
+                <img src="{{ object.image.url }}" class="image-fluid" alt='{{ object.slug }}'>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

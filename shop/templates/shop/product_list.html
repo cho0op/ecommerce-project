@@ -4,8 +4,13 @@
         <div class="row">
             {% for object in object_list %}
                 <div class="col">
-                {% include 'shop/snippets/card.html' %}
-                </div>
+                    {{ forloop.counter }}
+                    {% include 'shop/snippets/card.html' %}
+                    {% if forloop.counter|divisibleby:2%}
+                        </div></div><div class="row">
+                    {% else %}
+                        </div>
+                    {% endif %}
             {% endfor %}
         </div>
     </div>
