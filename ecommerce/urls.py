@@ -18,7 +18,7 @@ from django.urls import path, include
 from shop import views
 from django.conf.urls.static import static
 from django.conf import settings
-
+from  django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('contact/', views.contact_page, name="contacts"),
     path('login/', views.login_page, name="login"),
     path('register/', views.register_page, name="register"),
+    path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
     # path('featured/', views.ProductFeaturedListView.as_view()),
     # path('featured/<int:pk>/', views.ProductFeaturedDetailView.as_view()),
     # #products

@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1fe087fb-7f0d-4cdf-9fa3-d95428e588e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/templates/shop/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/templates/shop/snippets/card.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/snippets/card.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,9 +36,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ecommerce-project\shop\templates" />
+      <recent name="D:\ecommerce-project\shop" />
       <recent name="D:\ecommerce-project\shop\templates\shop" />
       <recent name="D:\ecommerce-project\shop\templates\snippets" />
-      <recent name="D:\ecommerce-project\shop" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -100,7 +95,8 @@
       <workItem from="1587982190761" duration="1430000" />
       <workItem from="1588063950755" duration="12176000" />
       <workItem from="1588238411515" duration="5216000" />
-      <workItem from="1588331407865" duration="4306000" />
+      <workItem from="1588331407865" duration="7692000" />
+      <workItem from="1588407532228" duration="3944000" />
     </task>
     <servers />
   </component>

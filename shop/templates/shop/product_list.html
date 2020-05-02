@@ -6,12 +6,11 @@
                 <div class="col">
                     {{ forloop.counter }}
                     {% include 'shop/snippets/card.html' %}
-                    {% if forloop.counter|divisibleby:2%}
-                        </div></div><div class="row">
+                    {% if forloop.counter|divisibleby:3%}
+                        </div></div><div class="row"><div class="col-12"><hr></div>
                     {% else %}
                         </div>
                     {% endif %}
             {% endfor %}
         </div>
-    </div>
 {% endblock %}
