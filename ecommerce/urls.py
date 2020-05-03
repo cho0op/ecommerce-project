@@ -18,13 +18,13 @@ from django.urls import path, include
 from shop import views
 from django.conf.urls.static import static
 from django.conf import settings
-from  django.views.generic import TemplateView
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('shop.urls', namespace='products')),
-    path('',views.home_page, name="home"),
+    path('search/', include('search.urls', namespace='search')),
+    path('', views.home_page, name="home"),
     path('contact/', views.contact_page, name="contacts"),
     path('login/', views.login_page, name="login"),
     path('register/', views.register_page, name="register"),
@@ -39,4 +39,4 @@ urlpatterns = [
     # path('products-fbv/<int:product_id>/', views.product_detail_view),
 ]
 
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

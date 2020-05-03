@@ -1,18 +1,20 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% include 'shop/base/css.html' %}
     <title>Hello, world!</title>
-  </head>
-  <body>
-    {% include 'shop/base/navbar.html' %}
+</head>
+<body>
+{% include 'shop/base/navbar.html' %}
+<div class="container ">
     {% block content %}
     {% endblock %}
-    {% include 'shop/base/js.html' %}
-  </body>
+</div>
+{% include 'shop/base/js.html' %}
+</body>
 </html>
