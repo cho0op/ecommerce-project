@@ -19,7 +19,11 @@ class ProductQuerySet(models.QuerySet):
         return self.filter(active=True)
 
     def search(self, query):
-        lookups = Q(title__icontains=query) | Q(description__icontains=query)  # contain in title or in dicription
+        lookups = (
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(tag__title__icontains=query)
+                  )  # contain in title or in dicription
         return self.filter(lookups).distinct()  #.distict - delete duplicate products when query is in title and discription
 
 class ProductManager(models.Manager):
