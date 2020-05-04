@@ -4,7 +4,8 @@
     <list default="true" id="1fe087fb-7f0d-4cdf-9fa3-d95428e588e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,11 +37,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ecommerce-project\shop\templates" />
       <recent name="D:\ecommerce-project\search\templates\search" />
       <recent name="D:\ecommerce-project\search\templates" />
       <recent name="D:\ecommerce-project\search\snippets" />
       <recent name="D:\ecommerce-project\shop\templates\shop\base" />
-      <recent name="D:\ecommerce-project\search" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -98,7 +99,9 @@
       <workItem from="1588238411515" duration="5216000" />
       <workItem from="1588331407865" duration="7692000" />
       <workItem from="1588407532228" duration="9613000" />
-      <workItem from="1588496230818" duration="8774000" />
+      <workItem from="1588496230818" duration="9374000" />
+      <workItem from="1588581316055" duration="6092000" />
+      <workItem from="1588593754108" duration="2898000" />
     </task>
     <servers />
   </component>

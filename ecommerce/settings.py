@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'shop',
     'search',
     'tags',
+    'carts'
 ]
 
 MIDDLEWARE = [
