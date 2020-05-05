@@ -2,6 +2,7 @@
 {% url 'contacts' as contact_url %}
 {% url 'products:list' as product_list_url %}
 {% url 'login' as login_url %}
+{% url 'carts:home' as cart_url %}
 {% load static %}
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -29,6 +30,12 @@
                     <a class="nav-link {% if request.path == product_list_url %} active {% endif %}"
                        href="{{ product_list_url }}">
                         Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == product_list_url %} active {% endif %}"
+                       href="{{ cart_url }}">
+                        <i class="fa fa-shopping-cart"></i> ({{ request.session.cart_items }})
                     </a>
                 </li>
                 {% if request.user.is_authenticated %}
