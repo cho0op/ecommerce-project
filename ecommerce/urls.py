@@ -25,10 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('shop.urls', namespace='products')),
     path('search/', include('search.urls', namespace='search')),
+    path('cart/', include('carts.urls', namespace='carts')),
     path('', views.home_page, name="home"),
     path('contact/', views.contact_page, name="contacts"),
     path('login/', views.login_page, name="login"),
-    path('cart/', cart_home, name="cart"),
     path('register/', views.register_page, name="register"),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
 

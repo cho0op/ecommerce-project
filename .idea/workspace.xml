@@ -4,6 +4,14 @@
     <list default="true" id="1fe087fb-7f0d-4cdf-9fa3-d95428e588e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/carts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/carts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/carts/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/carts/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/detail_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +108,7 @@
       <workItem from="1588496230818" duration="9374000" />
       <workItem from="1588581316055" duration="6092000" />
       <workItem from="1588593754108" duration="3499000" />
-      <workItem from="1588669687555" duration="881000" />
+      <workItem from="1588669687555" duration="9269000" />
     </task>
     <servers />
   </component>

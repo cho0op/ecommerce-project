@@ -1,16 +1,17 @@
 {% extends 'shop/base.html' %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>{{ object.title }}</h1>
-                {{ object.timestamp|time }}
-                {{ object.description|linebreaks }}
-                <br>
-                {% if object.image %}
-                <img src="{{ object.image.url }}" class="image-fluid" alt='{{ object.slug }}'>
-                {% endif %}
-            </div>
+    <div class="row">
+        <div class="col-8 md-col-12">
+            <h1>{{ object.title }}</h1>
+            {{ object.timestamp|time }}
+            {{ object.description|linebreaks }}
+            <br>
+            {% if object.image %}
+                <img src="{{ object.image.url }}" class="image-thumbnail" alt='{{ object.slug }}'>
+            {% endif %}
+        </div>
+        <div class="col-4 md-col-12">
+            {% include 'shop/snippets/update_card.html' with product=object cart=cart %}
         </div>
     </div>
 {% endblock %}

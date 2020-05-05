@@ -1,5 +1,28 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-<h1>Cart</h1>
+    <h1>Cart</h1>
+    {% if cart.products.exists %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in cart.products.all %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td><a href={{ product.get_absolute_url }} >{{ product.title }} </a> {% include 'shop/snippets/update_card.html' with product=product cart=cart in_cart=True %}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h4>Total price: {{ cart.total }}</h4>
+    {% else %}
+        cart is empty
+    {% endif %}
 {% endblock %}
