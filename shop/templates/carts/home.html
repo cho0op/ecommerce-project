@@ -25,6 +25,7 @@
             </tbody>
         </table>
         <h4>Total price: {{ cart.total }}</h4>
+        <a href="{% url 'carts:checkout' %}" class="btn btn-block btn-success col-3">Checkout</a>
     {% else %}
         cart is empty
     {% endif %}
