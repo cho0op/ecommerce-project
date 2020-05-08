@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    {% if not billing_profile %}
+        <div class="row text-center">
+            <div class="col-12 col-md-6">
+                <p class="lead">login</p>
+                {% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+            </div>
+            <div class="col-12 col-md-6">
+                <p class="lead">continue as Guest</p>
+            </div>
+            {% else %}
+            <h1> Checkout</h1>
+            <p> Cart total : {{ object.cart.total }}</p>
+            <p>Shipping total: {{ object.shipping_total }} </p>
+            <p>Order total: {{ object.total }}</p>
+        </div>
+    {% endif %}
+{% endblock %}
