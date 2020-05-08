@@ -19,7 +19,8 @@ from shop import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
-from carts.views import cart_home
+from accounts.views import register_page, login_page
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,8 +29,9 @@ urlpatterns = [
     path('cart/', include('carts.urls', namespace='carts')),
     path('', views.home_page, name="home"),
     path('contact/', views.contact_page, name="contacts"),
-    path('login/', views.login_page, name="login"),
-    path('register/', views.register_page, name="register"),
+    path('login/', login_page, name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path('register/', register_page, name="register"),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
 
     # path('featured/', views.ProductFeaturedListView.as_view()),

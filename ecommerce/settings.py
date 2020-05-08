@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tags',
     'carts',
     'orders',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
+
+LOGOUT_REDIRECT_URL = '/login'
 
 TEMPLATES = [
     {
