@@ -19,7 +19,7 @@ from shop import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
-from accounts.views import register_page, login_page
+from accounts.views import register_page, login_page, guest_register_view
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('login/', login_page, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('register/', register_page, name="register"),
+    path('register/guest', guest_register_view, name="guest_register"),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
 
     # path('featured/', views.ProductFeaturedListView.as_view()),
