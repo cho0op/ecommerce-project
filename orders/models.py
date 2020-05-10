@@ -4,12 +4,25 @@ from carts.models import Cart
 from ecommerce.utils import unique_order_od_generator
 from billing.models import BillingProfile
 import math
+
 ORDER_STATUS_CHOICES = (
     ('created', 'Created'),
     ('paid', 'Paid'),
     ('shipped', 'Shipped'),
     ('refunded', 'Refunded'),
 )
+
+
+class OrderManager(models.Manager):
+    def new_or_get(self, billing_profile, cart_obj):
+        qs = self.get_queryset().filter(billing_profile=billing_profile, cart=cart_obj, active=True)
+        if qs.count() == 1:
+            created=False
+            obj = qs.first()
+        else:
+            created=True
+            obj = self.objects.create(billing_profile=billing_profile, cart=cart_obj)
+        return obj, created
 
 
 class Order(models.Model):
@@ -23,13 +36,15 @@ class Order(models.Model):
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     active = models.BooleanField(default=True)
 
+    objects=OrderManager()
+
     def __str__(self):
         return self.order_id
 
     def update_total(self):
         cart_total = self.cart.total
         shipping_total = self.shipping_total
-        new_total = format( math.fsum([cart_total, shipping_total]), '.2f')
+        new_total = format(math.fsum([cart_total, shipping_total]), '.2f')
         self.total = new_total
         self.save()
         return new_total
@@ -38,6 +53,9 @@ class Order(models.Model):
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_od_generator(instance)
+    qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
+    if qs.exists():
+        qs.update(active=False)
 
 
 pre_save.connect(pre_save_create_order_id, sender=Order)
@@ -53,10 +71,13 @@ def post_save_cart_total(sender, instance, created, *args, **kwargs):
             order_obj = qs.first()
             order_obj.update_total()
 
+
 post_save.connect(post_save_cart_total, sender=Cart)
 
-def post_save_order(sender, instance,created, *args, **kwargs):
+
+def post_save_order(sender, instance, created, *args, **kwargs):
     if created:
         instance.update_total()
+
 
 post_save.connect(post_save_order, sender=Order)
