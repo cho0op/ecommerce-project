@@ -23,12 +23,12 @@
                     {% include 'addresses/snippets/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
                 </div>
             </div>
-        {% elif not object.billing_address%}
+        {% elif not object.billing_address %}
             <div class="row">
                 <div class="col-10 col-md-6 mx-auto">
                     <p class="lead">Billing address</p>
                     {% url 'checkout_address_create' as checkout_address_create %}
-                    {% include 'addresses/snippets/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing'%}
+                    {% include 'addresses/snippets/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
                 </div>
             </div>
         {% else %}
@@ -36,6 +36,10 @@
             <p> Cart total : {{ object.cart.total }}</p>
             <p>Shipping total: {{ object.shipping_total }} </p>
             <p>Order total: {{ object.total }}</p>
+            <form class="form" method="post" action="">
+                {% csrf_token %}
+                <button type="submit">Checkout</button>
+            </form>
         {% endif %}
     {% endif %}
 {% endblock %}
