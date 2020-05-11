@@ -21,7 +21,7 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from accounts.views import register_page, login_page, guest_register_view
 from django.contrib.auth.views import LogoutView
-from addresses.views import checkout_address_create_view
+from addresses.views import checkout_address_create_view, checkout_address_reuse_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('cart/', include('carts.urls', namespace='carts')),
     path('', views.home_page, name="home"),
     path('checkout/address/create/', checkout_address_create_view, name='checkout_address_create'),
+    path('checkout/address/reuse/', checkout_address_reuse_view, name='checkout_address_reuse'),
     path('contact/', views.contact_page, name="contacts"),
     path('login/', login_page, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
