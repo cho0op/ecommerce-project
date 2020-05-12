@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-6">
                         {% url 'checkout_address_reuse' as checkout_address_reuse %}
-                        {% include 'addresses/snippets/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=checkout_address_reuse%}
+                        {% include 'addresses/snippets/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=checkout_address_reuse %}
                     </div>
                 </div>
             </div>
@@ -47,19 +47,22 @@
                     </div>
                     <div class="col-6">
                         {% url 'checkout_address_reuse' as checkout_address_reuse %}
-                        {% include 'addresses/snippets/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_url=checkout_address_reuse%}
+                        {% include 'addresses/snippets/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_url=checkout_address_reuse %}
                     </div>
                 </div>
 
             </div>
         {% else %}
             <h1> Checkout</h1>
+            <p>Cars Items: {% for product in object.cart.products.all %}{{ product }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p> Shipping Address: {{ object.shipping_address.get_address }}</p>
+            <p> Billing Address: {{ object.shipping_address.get_address }}</p>
             <p> Cart total : {{ object.cart.total }}</p>
             <p>Shipping total: {{ object.shipping_total }} </p>
             <p>Order total: {{ object.total }}</p>
             <form class="form" method="post" action="">
                 {% csrf_token %}
-                <button type="submit">Checkout</button>
+                <button type="submit" class="btn btn-success">Checkout</button>
             </form>
         {% endif %}
     {% endif %}
