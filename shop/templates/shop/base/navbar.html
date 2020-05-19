@@ -36,7 +36,8 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == product_list_url %} active {% endif %}"
                        href="{{ cart_url }}">
-                        <i class="fa fa-shopping-cart"> </i><span class="navbar-cart-count">{{ request.session.cart_items }}</span>
+                        <span class="navbar-cart-count">{{ request.session.cart_items }}</span>
+                        <i class="fa fa-shopping-cart"> </i>
                     </a>
                 </li>
                 {% if request.user.is_authenticated %}
