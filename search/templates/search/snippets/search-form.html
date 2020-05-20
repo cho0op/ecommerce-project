@@ -1,4 +1,4 @@
-<form class="form my-2 my-lg-0" method="get" action="{% url 'search:query' %}">
+<form class="form my-2 my-lg-0 search-form" method="get" action="{% url 'search:query' %}">
     <div class="input-group">
         <input class="form-control  col-lg-8 col-md-6" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
         <div class="input-group-append">
