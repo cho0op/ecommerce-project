@@ -34,6 +34,13 @@ class ContactForm(forms.Form):
             raise forms.ValidationError("only .com emails")
         return email
 
+    # tested several mistakes in jquery
+    # def clean_fullname(self):
+    #     name = self.cleaned_data.get("fullname")
+    #     if not name[0].isupper():
+    #         raise forms.ValidationError("Name has to start form Upper letter")
+    #     return name
+
 
 
 

@@ -18,6 +18,62 @@
 {% include 'shop/base/js.html' %}
 <script>
     $(document).ready(function () {
+        //Contact form
+
+        var contactForm = $(".contact-form");
+        var contactFormMethod = contactForm.attr("method");
+        var contactFormAction = contactForm.attr("action");
+
+        function displaySubmitting(btn, defaultTxt, doSubmit) {
+            if (doSubmit) {
+                btn.addClass('disabled');
+                btn.html("<i class='fa fa-spin fa-spinner'></i>Sending...")
+            } else {
+                btn.removeClass('disabled');
+                btn.html(defaultTxt)
+            }
+        }
+
+        contactForm.submit(function (event) {
+            event.preventDefault();
+            var contactFormSubmitBtn = contactForm.find("[type='submit']");
+            var contactFormSubmitBtnText = contactFormSubmitBtn.text();
+            var contactFormData = contactForm.serialize();
+            var thisForm = $(this);
+            displaySubmitting(contactFormSubmitBtn,"", true);
+            $.ajax({
+                method: contactFormMethod,
+                url: contactFormAction,
+                data: contactFormData,
+                success: function (data) {
+                    thisForm[0].reset();
+                    $.alert({
+                        title: "success!",
+                        content: data.message,
+                        theme: "modern",
+                    });
+                    setTimeout(function () {
+                        displaySubmitting(contactFormSubmitBtn,contactFormSubmitBtnText, false)
+                    }, 2000)
+                },
+                error: function (error) {
+                    console.log(error);
+                    var jsonData = error.responseJSON;
+                    var msg = "";
+                    $.each(jsonData, function (key, value) {
+                        msg += key + ":" + value[0].message + "<br>"
+                    });
+                    $.alert({
+                        title: "errorrrrrrrrrr.//2.sa.d/......",
+                        content: msg,
+                        theme: "modern",
+                    });
+                    setTimeout(function () {
+                        displaySubmitting(contactFormSubmitBtn,contactFormSubmitBtnText, false)
+                    }, 1000)
+                }
+            })
+        });
         //Auto Search
         var searchForm = $('.search-form');
         var searchInput = searchForm.find("[name='q']");
@@ -72,11 +128,11 @@
                         refreshCart();
                     }
                 },
-                error:function (errorData) {
+                error: function (errorData) {
                     $.alert({
-                        title:"errorrrrrrrrrr.//2.sa.d/......",
-                        content:"something went wronnngngngn",
-                        theme:"modern",
+                        title: "errorrrrrrrrrr.//2.sa.d/......",
+                        content: "something went wronnngngngn",
+                        theme: "modern",
                     })
                 }
             });
@@ -114,9 +170,9 @@
                 },
                 error: function (data) {
                     $.alert({
-                        title:"errorrrrrrrrrr.//2.sa.d/......",
-                        content:"something went wronnngngngn",
-                        theme:"modern",
+                        title: "errorrrrrrrrrr.//2.sa.d/......",
+                        content: "something went wronnngngngn",
+                        theme: "modern",
                     })
                 }
             })
