@@ -6,10 +6,12 @@ from django.db.models import Q
 import os, random
 from ecommerce.utils import unique_slug_generator
 
+
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
     name, ext = os.path.splitext(base_name)
     return name, ext
+
 
 class ProductQuerySet(models.QuerySet):
     def featured(self):
@@ -23,8 +25,10 @@ class ProductQuerySet(models.QuerySet):
                 Q(title__icontains=query) |
                 Q(description__icontains=query) |
                 Q(tag__title__icontains=query)
-                  )  # contain in title or in dicription
-        return self.filter(lookups).distinct()  #.distict - delete duplicate products when query is in title and discription
+        )  # contain in title or in dicription
+        return self.filter(
+            lookups).distinct()  # .distict - delete duplicate products when query is in title and discription
+
 
 class ProductManager(models.Manager):
     def get_queryset(self):
@@ -41,8 +45,10 @@ class ProductManager(models.Manager):
         if qs.count() == 1:
             return qs.first()
         return
+
     def search(self, query):
         return self.get_queryset().search(query)
+
 
 def upload_image_path(instance, filename):
     print(instance)
@@ -59,12 +65,15 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=5)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
-    objects = ProductManager()
     featured = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+    objects = ProductManager()
+
     def __str__(self):
         return self.title
+
     def get_absolute_url(self):
         return reverse('products:detail', kwargs={'slug': self.slug})
 
