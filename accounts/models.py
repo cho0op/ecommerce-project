@@ -1,6 +1,39 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, is_staff=False, is_active=True, is_admin=False):
+        if not email:
+            raise ValueError("User must have an email")
+        if not password:
+            raise ValueError("User must have a password")
+        user = self.model(
+            email=self.normalize_email(email)
+        )
+        user.set_password(password)
+        user.staff = is_staff
+        user.admin = is_admin
+        user.active = is_active
+        user.save(using=self._db)
+        return user
+
+    def create_staffuser(self, email, password=None):
+        user = self.create_user(
+            email,
+            password=password,
+            is_staff=True
+        )
+        return user
+
+    def create_supperuser(self, email, password=None):
+        user = self.create_user(
+            email,
+            password=password,
+            is_staff=True,
+            is_active=True
+        )
+        return user
 
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
@@ -10,7 +43,9 @@ class CustomUser(AbstractBaseUser):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS=[]
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
 
     def __str__(self):
         return self.email
