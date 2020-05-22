@@ -12,8 +12,10 @@ class UserManager(BaseUserManager):
             raise ValueError("User must have an email")
         if not password:
             raise ValueError("User must have a password")
+
         user = self.model(
-            email=self.normalize_email(email)
+            email=self.normalize_email(email),
+
         )
         user.set_password(password)
         user.staff = is_staff
@@ -42,6 +44,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
+    full_name=models.CharField(max_length=255, blank=True, null=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
