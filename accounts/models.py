@@ -4,6 +4,8 @@ from django.contrib.auth.models import (
 from django.db import models
 
 
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, is_staff=False, is_active=True, is_admin=False):
         if not email:
@@ -28,7 +30,7 @@ class UserManager(BaseUserManager):
         )
         return user
 
-    def create_supperuser(self, email, password=None):
+    def create_superuser(self, email, password=None):
         user = self.create_user(
             email,
             password=password,
@@ -70,6 +72,12 @@ class User(AbstractBaseUser):
     @property
     def is_active(self):
         return self.active
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
 
 class GuestEmail(models.Model):
