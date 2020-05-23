@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #my apps
     'shop',
     'search',
     'tags',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     'billing',
     'addresses',
+    'analytics',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes built-in auth model on our custom
