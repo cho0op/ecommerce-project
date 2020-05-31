@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from accounts.models import GuestEmail
 
 import stripe
 
+stripe.api_key = "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa"
 
 User = settings.AUTH_USER_MODEL
 
@@ -32,6 +33,7 @@ class BillingProfile(models.Model):
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
+    customer_id = models.CharField(max_length=120, blank=True, null=True)
 
     objects = BillingProfileManager()
 
@@ -39,10 +41,16 @@ class BillingProfile(models.Model):
         return self.email
 
 
-# def billing_profile_created_receiver(sender, instance, created, *args, **kwargs):
-#     if created:
-#         print('send to stripe e.g.')
-#         instance.costumer_id = neцID
+def billing_profile_created_receiver(sender, instance, *args, **kwargs):
+    if not instance.customer_id and instance.email:
+        customer = stripe.Customer.create(
+            email=instance.email
+        )
+        instance.customer_id = customer.id
+
+
+pre_save.connect(billing_profile_created_receiver, sender=BillingProfile)
+
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created:
