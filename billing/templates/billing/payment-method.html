@@ -5,7 +5,7 @@
 
     </style>
     <div class="col-10 col-md-6 mx-auto">
-        <form action="/charge" method="post" id="payment-form" data-token="{{ publish_key }}">
+        <form class="payment-form" action="/charge" method="post" id="payment-form" data-token="{{ publish_key }}" data-next-url="{% if next_url %}{{ next_url }}{% endif %}">
             <div class="form-row ">
                 <label for="card-element">
                     Credit or debit card
@@ -25,8 +25,18 @@
 {% endblock %}
 {% block javascript %}
     <script>
+        var paymentForm=$('.payment-form');
+
+        if(paymentForm.length>1){
+            alert("Only one payment form if allowed ");
+            paymentForm.css('display', 'none')
+        }
+        else if(paymentForm.length==1){
+            var pubKey = paymentForm.attr('data-token');
+            var nextUrl = paymentForm.attr('data-next-url')
+        }
         // Create a Stripe client.
-        var stripe = Stripe('pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir');
+        var stripe = Stripe(pubKey);
 
         // Create an instance of Elements.
         var elements = stripe.elements();
@@ -77,14 +87,34 @@
                     errorElement.textContent = result.error.message;
                 } else {
                     // Send the token to your server.
-                    stripeTokenHandler(result.token);
+                    stripeTokenHandler(nextUrl,result.token);
                 }
             });
         });
 
         // Submit the form with the token ID.
-        function stripeTokenHandler(token) {
-            console.log(token);
+        function stripeTokenHandler(nextUrl, token) {
+            console.log(token.id);
+            var paymentMethodEndpoint = '/billing/payment-method/create/';
+            var data = {
+                "token":token.id
+            };
+            $.ajax({
+                data:data,
+                url:paymentMethodEndpoint,
+                method:"POST",
+                success:function (data) {
+                    console.log(data);
+                    if(nextUrl){
+                        window.location.href=nextUrl
+                    }else{
+                        window.location.reload();
+                    }
+                },
+                error:function (error) {
+                    console.log(error);
+                }
+            });
             {% comment %}// Insert the token ID into the form so it gets submitted to the server
             var form = document.getElementById('payment-form');
             var hiddenInput = document.createElement('input');
