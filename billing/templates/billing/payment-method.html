@@ -6,7 +6,7 @@
     </style>
     <div class="col-10 col-md-6 mx-auto">
         <form class="payment-form" action="/charge" method="post" id="payment-form" data-token="{{ publish_key }}"
-              data-next-url="{{ next_url }}">
+              data-next-url="{% if next_url %}{{ next_url }}{% endif %}">
             <div class="form-row ">
                 <label for="card-element">
                     Credit or debit card
@@ -113,13 +113,20 @@
                 method: "POST",
                 success: function (data) {
                     card.clear();
-                    $.alert({
-                        width: 2000,
-                        title: "success!",
-                        content: "card is added <i class='fa fa-spin fa-spinner'></i>Redirecting",
-                        theme: "modern",
-                    });
-                    redirectToPath(nextUrl, 1500);
+                    if (nextUrl) {
+                        $.alert({
+                            title: "success!",
+                            content: "card is added <i class='fa fa-spin fa-spinner'></i>Redirecting",
+                            theme: "modern",
+                        });
+                        redirectToPath(nextUrl, 1500);
+                    } else {
+                        $.alert({
+                            title: "success!",
+                            content: "card is added!",
+                            theme: "modern",
+                        });
+                    }
                 },
                 error: function (error) {
                     console.log(error);
