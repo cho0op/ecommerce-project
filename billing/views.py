@@ -8,9 +8,6 @@ STRIPE_PUB_KEY = "pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir"
 
 
 def payment_method_view(request):
-    # if request.user.is_authenticated:
-    #     billing_profile=request.user.billingprofile
-    #     my_customer_id = billing_profile.customer_id
     next_url = None
     next_ = request.GET.get('next')
     if is_safe_url(next_, request.get_host()):
