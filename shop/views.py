@@ -6,7 +6,8 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 from carts.models import Cart
 from analytics.signals import object_viewed_signal
-from analytics.mixins import ObjectViewedMixin
+# from analytics.mixins import ObjectViewedMixin
+
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -24,16 +25,16 @@ def product_list_view(request):
     return render(request, 'shop/product_list.html', context)
 
 
-class ProductDetailSlugView(ObjectViewedMixin, DetailView):
+class ProductDetailSlugView(DetailView):
     model = Product
     template_name = 'shop/detail_list.html'
 
-    def get_context_data(self, **kwargs):
-        request = self.request
-        context = super(ProductDetailSlugView, self).get_context_data()
-        cart_obj, new_obj = Cart.objects.new_or_get(request)
-        context['cart'] = cart_obj
-        return context
+    # def get_context_data(self, **kwargs):
+    #     request = self.request
+    #     context = super(ProductDetailSlugView, self).get_context_data()
+    #     cart_obj, new_obj = Cart.objects.new_or_get(request)
+    #     context['cart'] = cart_obj
+    #     return context
 
     def get_object(self, *args, **kwargs):
         request = self.request
@@ -43,7 +44,7 @@ class ProductDetailSlugView(ObjectViewedMixin, DetailView):
         except Product.DoesNotExist:
             raise Http404("No such product...")
         except Product.MultipleObjectsReturned:
-            qs=Product.objects.filter(slug=slug, active=True)
+            qs = Product.objects.filter(slug=slug, active=True)
             instance = qs.first()
         # object_viewed_signal.send(instance.__class__, instance=instance, request=request)
         return instance
