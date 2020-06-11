@@ -1,9 +1,18 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block content%}
+{% block content %}
     <h1>studying Django project</h1>
-    {% if request.user.is_authenticated %}
-        <h2>Premium</h2>
-        {{ premium_content }}
-    {% endif %}
+    <h2>On this project I make e-commerce web application with Django. </h2>
+    <h6>Some things that I learned here:</h6>
+    <ol>
+        <li><strong>Class</strong> based views</li>
+        <li>efficient work with templates and snippets</li>
+        <li><strong>Slug</strong> urls</li>
+        <li><strong>Abstract</strong> user model and Django <strong>models</strong> in general</li>
+        <li><strong>Signals</strong></li>
+        <li>Checkout process with <strong>Stripe</strong></li>
+        <li><strong>Ajax</strong> search and updating of cart</li>
+        <li>Working with <strong>sessions</strong></li>
+        <li>And a lot of other things... </li>
+    </ol>
 {% endblock %}
