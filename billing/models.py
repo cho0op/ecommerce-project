@@ -68,10 +68,16 @@ class Card(models.Model):
     last4 = models.CharField(max_length=4, blank=True, null=True)
     default = models.BooleanField(default=True)
 
-    objects=CardManager()
+    objects = CardManager()
 
     def __str__(self):
         return "{} {}".format(self.brand, self.last4)
+
+class Charge(models.Model):
+    pass
+
+class ChargeManager(models.Manager):
+    pass
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
     if not instance.customer_id and instance.email:
