@@ -75,7 +75,8 @@ class Card(models.Model):
 
 
 class Charge(models.Model):
-    pass
+    billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
+    stripe_id = models.CharField(max_length=120)
 
 
 class ChargeManager(models.Manager):
