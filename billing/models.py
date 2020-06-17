@@ -74,13 +74,13 @@ class Card(models.Model):
         return "{} {}".format(self.brand, self.last4)
 
 
+class ChargeManager(models.Manager):
+    pass
+
+
 class Charge(models.Model):
     billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
     stripe_id = models.CharField(max_length=120)
-
-
-class ChargeManager(models.Manager):
-    pass
 
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
