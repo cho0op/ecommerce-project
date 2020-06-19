@@ -40,18 +40,23 @@ class BillingProfile(models.Model):
     def __str__(self):
         return self.email
 
+    def charge(self, order_obj, card=None):
+        return Charge.objects.create(self,order_obj,card)
+
 
 class CardManager(models.Manager):
-    def add_new(self, billing_profile, stripe_card_response):
-        if str(stripe_card_response.object) == "card":
+    def add_new(self, billing_profile, token):
+        if token:
+            customer = stripe.Customer.retrieve(billing_profile.customer_id)
+            card_response = customer.sources.create(source=token)
             new_card = self.model(
                 billing_profile=billing_profile,
-                stripe_id=stripe_card_response.id,
-                brand=stripe_card_response.brand,
-                country=stripe_card_response.country,
-                exp_month=stripe_card_response.exp_month,
-                exp_year=stripe_card_response.exp_year,
-                last4=stripe_card_response.last4,
+                stripe_id=card_response.id,
+                brand=card_response.brand,
+                country=card_response.country,
+                exp_month=card_response.exp_month,
+                exp_year=card_response.exp_year,
+                last4=card_response.last4,
             )
             new_card.save()
             return new_card
@@ -75,7 +80,34 @@ class Card(models.Model):
 
 
 class ChargeManager(models.Manager):
-    pass
+    def create(self, billing_profile, order_obj, card=None):
+        card_obj = card
+        if card_obj is None:
+            cards = billing_profile.card_set.filter(default=True)
+            if cards.exists():
+                card_obj = cards.first()
+        if card_obj is None:
+            return False, "no card"
+        charge = stripe.Charge.create(
+            amount=int(order_obj.total * 100),
+            currency="usd",
+            customer=billing_profile.customer_id,
+            source=card_obj.stripe_id,
+            metadata={"order_id":order_obj.order_id},
+        )
+        print(charge)
+        new_charge_obj = self.model(
+            billing_profile=billing_profile,
+            stripe_id=charge.id,
+            paid=charge.paid,
+            refunded=charge.refunded,
+            outcome=charge.outcome,
+            outcome_type=charge.outcome.get('type'),
+            seller_message=charge.outcome.get('seller_message'),
+            risk_level=charge.outcome.get('risk_level'),
+        )
+        new_charge_obj.save()
+        return new_charge_obj.paid, new_charge_obj.seller_message
 
 
 class Charge(models.Model):
@@ -84,8 +116,11 @@ class Charge(models.Model):
     paid = models.BooleanField(default=False)
     refunded = models.BooleanField(default=True)
     outcome = models.TextField(null=True, blank=True)
+    outcome_type = models.CharField(max_length=120, null=True, blank=True)
     seller_message = models.CharField(max_length=120, null=True, blank=True)
     risk_level = models.CharField(max_length=120, null=True, blank=True)
+
+    objects = ChargeManager()
 
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):

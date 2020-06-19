@@ -25,8 +25,7 @@ def payment_method_create_view(request):
         return HttpResponse({'message': "cant find user"}, status_code=401)
     token = request.POST.get('token')
     if token is not None:
-        customer = stripe.Customer.retrieve(billing_profile.customer_id)
-        card_response = customer.sources.create(source=token)
+
         new_cart_obj=Card.objects.add_new(billing_profile=billing_profile, stripe_card_response=card_response)
         print(new_cart_obj)
     if request.method == "POST" and request.is_ajax():
