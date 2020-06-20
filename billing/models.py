@@ -41,7 +41,22 @@ class BillingProfile(models.Model):
         return self.email
 
     def charge(self, order_obj, card=None):
-        return Charge.objects.create(self,order_obj,card)
+        return Charge.objects.create(self, order_obj, card)
+
+    def get_cards(self):
+        return self.card_set.all()
+
+    @property
+    def has_card(self):
+        card_qs = self.get_cards()
+        return card_qs.exists()
+
+    @property
+    def default_card(self):
+        default_cards=self.get_cards().filter(default=True)
+        if default_cards.exists():
+            return default_cards
+        return None
 
 
 class CardManager(models.Manager):
@@ -93,7 +108,7 @@ class ChargeManager(models.Manager):
             currency="usd",
             customer=billing_profile.customer_id,
             source=card_obj.stripe_id,
-            metadata={"order_id":order_obj.order_id},
+            metadata={"order_id": order_obj.order_id},
         )
         print(charge)
         new_charge_obj = self.model(
