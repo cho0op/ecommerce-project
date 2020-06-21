@@ -46,6 +46,10 @@ class BillingProfile(models.Model):
     def get_cards(self):
         return self.card_set.all()
 
+    def set_cards_inactive(self):
+        cards_qs=self.get_cards()
+        cards_qs.update(active=False)
+        return cards_qs.filter(active=True).count()
     @property
     def has_card(self):
         card_qs = self.get_cards()
@@ -53,13 +57,18 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        default_cards=self.get_cards().filter(default=True)
+        default_cards = self.get_cards().filter(default=True)
         if default_cards.exists():
             return default_cards
         return None
 
 
 class CardManager(models.Manager):
+    def all(self):
+        return self.get_queryset().filter(active=True)
+
+
+
     def add_new(self, billing_profile, token):
         if token:
             customer = stripe.Customer.retrieve(billing_profile.customer_id)
@@ -87,6 +96,8 @@ class Card(models.Model):
     exp_year = models.IntegerField(blank=True, null=True)
     last4 = models.CharField(max_length=4, blank=True, null=True)
     default = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = CardManager()
 
@@ -110,7 +121,6 @@ class ChargeManager(models.Manager):
             source=card_obj.stripe_id,
             metadata={"order_id": order_obj.order_id},
         )
-        print(charge)
         new_charge_obj = self.model(
             billing_profile=billing_profile,
             stripe_id=charge.id,
