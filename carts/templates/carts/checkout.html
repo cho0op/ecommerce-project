@@ -60,6 +60,7 @@
                 {% endif %}{% endfor %}</p>
                 <p> Shipping Address: {{ object.shipping_address.get_address }}</p>
                 <p> Billing Address: {{ object.shipping_address.get_address }}</p>
+                <p> Payment method : {{ billing_profile.default_card }}</p>
                 <p> Cart total : {{ object.cart.total }}</p>
                 <p>Shipping total: {{ object.shipping_total }} </p>
                 <p>Order total: {{ object.total }}</p>

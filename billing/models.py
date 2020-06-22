@@ -47,9 +47,10 @@ class BillingProfile(models.Model):
         return self.card_set.all()
 
     def set_cards_inactive(self):
-        cards_qs=self.get_cards()
+        cards_qs = self.get_cards()
         cards_qs.update(active=False)
         return cards_qs.filter(active=True).count()
+
     @property
     def has_card(self):
         card_qs = self.get_cards()
@@ -57,17 +58,15 @@ class BillingProfile(models.Model):
 
     @property
     def default_card(self):
-        default_cards = self.get_cards().filter(default=True)
+        default_cards = self.get_cards().filter(active=True, default=True)
         if default_cards.exists():
-            return default_cards
+            return default_cards.first()
         return None
 
 
 class CardManager(models.Manager):
     def all(self):
         return self.get_queryset().filter(active=True)
-
-
 
     def add_new(self, billing_profile, token):
         if token:
