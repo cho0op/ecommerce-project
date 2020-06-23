@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 from accounts.models import GuestEmail
-
+from django.urls import reverse
 import stripe
 
 stripe.api_key = "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa"
@@ -50,6 +50,9 @@ class BillingProfile(models.Model):
         cards_qs = self.get_cards()
         cards_qs.update(active=False)
         return cards_qs.filter(active=True).count()
+
+    def get_change_payment_url(self):
+        return reverse('billing-payment-method')
 
     @property
     def has_card(self):
@@ -145,6 +148,16 @@ class Charge(models.Model):
     risk_level = models.CharField(max_length=120, null=True, blank=True)
 
     objects = ChargeManager()
+
+
+def billing_profile_update_default(sender, instance, *args, **kwargs):
+    if instance.default:
+        billing_profile = instance.billing_profile
+        qs = Card.objects.filter(billing_profile=billing_profile).exclude(pk=instance.pk)
+        qs.update(default=False)
+
+
+pre_save.connect(billing_profile_update_default, sender=Card)
 
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
