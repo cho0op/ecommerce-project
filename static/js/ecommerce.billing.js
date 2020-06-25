@@ -3,7 +3,7 @@ $(document).ready(function () {
     var stripeTemplate = $.templates("#stripeTemplate");
     var stripeToken = stripeFormModule.attr("data-token");
     var stripeNextUrl = stripeFormModule.attr("data-next-url");
-    var stripeBtnTitle=stripeFormModule.attr("data-btn-title");
+    var stripeBtnTitle = stripeFormModule.attr("data-btn-title");
     var stripeTemplateDataContext = {
         publishKey: stripeToken,
         nextUrl: stripeNextUrl,
@@ -61,14 +61,21 @@ $(document).ready(function () {
     });
 
     // Handle form submission.
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function (event) {
+    var form = $('#payment-form');
+    form.on('submit', function (event) {
         event.preventDefault();
-
+        var $this = $(this);
+        var btnLoad = $this.find(".brn-load");
+        var loadTime = 1500;
+        var currentTimeOut;
+        var errorHtml = "<i class='fa fa-warning'></i> Error";
+        var loadingHtml = "<i class='fa fa-spin fa-spiner'></i> Loading";
+        var errorClasses = "btn btn-danger disabled my-3";
+        var loadingClasses = "btn btn-success disabled my-3";
         stripe.createToken(card).then(function (result) {
             if (result.error) {
                 // Inform the user if there was an error.
-                var errorElement = document.getElementById('card-errors');
+                var errorElement = document.$('#card-errors');
                 errorElement.textContent = result.error.message;
             } else {
                 // Send the token to your server.
@@ -76,6 +83,25 @@ $(document).ready(function () {
             }
         });
     });
+
+    function displayBrnStatus(element, newHtml, newClasses, loadTimem timeOut) {
+        if timeOut{
+            clearTimeout(timeOut)
+        }
+        var defaultHtml = element.html();
+        var defaultClasses = element.attr("class");
+        element.html(newHtml);
+        element.removeClass(defaultClasses);
+        element.addClass(newClasses);
+        return setTimeout(function () {
+            var defaultHtml = element.html();
+            var defaultClasses = element.attr("class");
+            element.html(newHtml);
+            element.addClass(defaultClasses);
+            element.removeClass(newClasses);
+        }, loadTime)
+
+    }
 
     function redirectToPath(nextPath, timeOffset) {
         if (nextPath) {
