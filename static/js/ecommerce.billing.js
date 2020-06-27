@@ -63,7 +63,6 @@ $(document).ready(function () {
     // Handle form submission.
     var form = $('#payment-form');
     form.on('submit', function (event) {
-        event.preventDefault();
         var $this = $(this);
         var btnLoad = $this.find(".brn-load");
         var loadTime = 1500;
@@ -77,9 +76,11 @@ $(document).ready(function () {
                 // Inform the user if there was an error.
                 currentTimeOut = displayBtnStatus(btnLoad, errorHtml, errorClasses, 500, currentTimeOut);
                 var errorElement = document.$('#card-errors');
+                event.preventDefault();
                 errorElement.textContent = result.error.message;
             } else {
                 // Send the token to your server.
+
                 currentTimeOut = displayBtnStatus(btnLoad, loadingHtml, loadingClasses, 2000, currentTimeOut);
                 stripeTokenHandler(nextUrl, result.token);
             }
@@ -95,14 +96,14 @@ $(document).ready(function () {
         element.html(newHtml);
         element.removeClass(defaultClasses);
         element.addClass(newClasses);
+
         return setTimeout(function () {
             var defaultHtml = element.html();
             var defaultClasses = element.attr("class");
             element.html(newHtml);
-            element.addClass(defaultClasses);
             element.removeClass(newClasses);
+            element.addClass(defaultClasses);
         }, loadTime)
-
     }
 
     function redirectToPath(nextPath, timeOffset) {

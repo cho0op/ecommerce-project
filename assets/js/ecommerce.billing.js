@@ -21,7 +21,7 @@ $(document).ready(function () {
         console.log(nextUrl);
     }
     // Create a Stripe client.
-    var stripe = Stripe(toString(pubKey));
+    var stripe = Stripe(pubKey);
 
     // Create an instance of Elements.
     var elements = stripe.elements();
@@ -102,7 +102,6 @@ $(document).ready(function () {
             element.addClass(defaultClasses);
             element.removeClass(newClasses);
         }, loadTime)
-
     }
 
     function redirectToPath(nextPath, timeOffset) {
