@@ -28,6 +28,7 @@ def payment_method_create_view(request):
     token = request.POST.get('token')
     if token is not None:
         new_cart_obj = Card.objects.add_new(billing_profile, token)
+        print(new_cart_obj)
     if request.method == "POST" and request.is_ajax():
         return JsonResponse({"message": "done"})
     return HttpResponse("error", status=401)

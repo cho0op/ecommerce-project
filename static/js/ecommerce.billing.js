@@ -75,17 +75,19 @@ $(document).ready(function () {
         stripe.createToken(card).then(function (result) {
             if (result.error) {
                 // Inform the user if there was an error.
+                currentTimeOut = displayBtnStatus(btnLoad, errorHtml, errorClasses, 500, currentTimeOut);
                 var errorElement = document.$('#card-errors');
                 errorElement.textContent = result.error.message;
             } else {
                 // Send the token to your server.
+                currentTimeOut = displayBtnStatus(btnLoad, loadingHtml, loadingClasses, 2000, currentTimeOut);
                 stripeTokenHandler(nextUrl, result.token);
             }
         });
     });
 
-    function displayBrnStatus(element, newHtml, newClasses, loadTimem timeOut) {
-        if timeOut{
+    function displayBtnStatus(element, newHtml, newClasses, loadTime, timeOut) {
+        if (timeOut) {
             clearTimeout(timeOut)
         }
         var defaultHtml = element.html();
