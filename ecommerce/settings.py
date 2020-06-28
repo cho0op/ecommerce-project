@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # my apps
+    #my apps
     'shop',
     'search',
     'tags',
@@ -48,6 +48,10 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes built-in auth model on our custom
+
+MAILCHIMP_API_KEY = "9272cfbe6ac9d5662f9f734c8c6603bd-us10"
+MAILCHIMP_DATA_CENTER = "us10"
+MAILCHIMP_EMAIL_LIST_ID = "669b69440a"
 
 STRIPE_SECRET_KEY = "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa"
 STRIPE_PUB_KEY = "pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir"
@@ -128,11 +132,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/assets/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, "assets")
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

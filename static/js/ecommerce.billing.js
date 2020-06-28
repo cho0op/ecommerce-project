@@ -3,7 +3,7 @@ $(document).ready(function () {
     var stripeTemplate = $.templates("#stripeTemplate");
     var stripeToken = stripeFormModule.attr("data-token");
     var stripeNextUrl = stripeFormModule.attr("data-next-url");
-    var stripeBtnTitle = stripeFormModule.attr("data-btn-title");
+    var stripeBtnTitle=stripeFormModule.attr("data-btn-title");
     var stripeTemplateDataContext = {
         publishKey: stripeToken,
         nextUrl: stripeNextUrl,
@@ -61,50 +61,21 @@ $(document).ready(function () {
     });
 
     // Handle form submission.
-    var form = $('#payment-form');
-    form.on('submit', function (event) {
-        var $this = $(this);
-        var btnLoad = $this.find(".brn-load");
-        var loadTime = 1500;
-        var currentTimeOut;
-        var errorHtml = "<i class='fa fa-warning'></i> Error";
-        var loadingHtml = "<i class='fa fa-spin fa-spiner'></i> Loading";
-        var errorClasses = "btn btn-danger disabled my-3";
-        var loadingClasses = "btn btn-success disabled my-3";
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
         stripe.createToken(card).then(function (result) {
             if (result.error) {
                 // Inform the user if there was an error.
-                currentTimeOut = displayBtnStatus(btnLoad, errorHtml, errorClasses, 500, currentTimeOut);
-                var errorElement = document.$('#card-errors');
-                event.preventDefault();
+                var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = result.error.message;
             } else {
                 // Send the token to your server.
-
-                currentTimeOut = displayBtnStatus(btnLoad, loadingHtml, loadingClasses, 2000, currentTimeOut);
                 stripeTokenHandler(nextUrl, result.token);
             }
         });
     });
-
-    function displayBtnStatus(element, newHtml, newClasses, loadTime, timeOut) {
-        if (timeOut) {
-            clearTimeout(timeOut)
-        }
-        var defaultHtml = element.html();
-        var defaultClasses = element.attr("class");
-        element.html(newHtml);
-        element.removeClass(defaultClasses);
-        element.addClass(newClasses);
-
-        return setTimeout(function () {
-            var defaultHtml = element.html();
-            var defaultClasses = element.attr("class");
-            element.html(newHtml);
-            element.removeClass(newClasses);
-            element.addClass(defaultClasses);
-        }, loadTime)
-    }
 
     function redirectToPath(nextPath, timeOffset) {
         if (nextPath) {
