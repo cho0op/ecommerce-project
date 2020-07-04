@@ -24,6 +24,7 @@ from django.contrib.auth.views import LogoutView
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
 from carts.views import cart_detail_api_view
 from billing.views import payment_method_view, payment_method_create_view
+from marketing.views import MarketingPreferenceUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,8 +42,8 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name="register"),
     path('register/guest/', guest_register_view, name="guest_register"),
     path('api/cart/', cart_detail_api_view, name="api_cart"),
-    path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
-
+    path('settings/email/', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
+    # path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
     # path('featured/', views.ProductFeaturedListView.as_view()),
     # path('featured/<int:pk>/', views.ProductFeaturedDetailView.as_view()),
     # #products
