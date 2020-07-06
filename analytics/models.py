@@ -34,8 +34,7 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
         user=request.user,
         content_type=content_type,
         object_id=instance.id,
-        ip_address=get_client_ip(request),
-
+        ip_address=get_client_ip(request)
     )
 
 

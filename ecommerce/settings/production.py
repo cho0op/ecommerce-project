@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my apps
+    # my apps
     'shop',
     'search',
     'tags',
@@ -45,9 +45,17 @@ INSTALLED_APPS = [
     'billing',
     'addresses',
     'analytics',
+    'marketing',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes built-in auth model on our custom
+
+MAILCHIMP_API_KEY = "9272cfbe6ac9d5662f9f734c8c6603bd-us10"
+MAILCHIMP_DATA_CENTER = "us10"
+MAILCHIMP_EMAIL_LIST_ID = "669b69440a"
+
+STRIPE_SECRET_KEY = "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa"
+STRIPE_PUB_KEY = "pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,3 +140,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 SECRET_ROOT = os.path.join(BASE_DIR, 'static')
+
+CORS_REPLACE_HTTPS_REFERER = True
+HOST_SCHEME = "https://"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 1000000
+SECURE_FRAME_DENY = True

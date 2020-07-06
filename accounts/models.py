@@ -4,8 +4,6 @@ from django.contrib.auth.models import (
 from django.db import models
 
 
-
-
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, is_staff=False, is_active=True, is_admin=False):
         if not email:
@@ -44,7 +42,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
-    full_name=models.CharField(max_length=255, blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)

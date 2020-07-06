@@ -3,7 +3,6 @@
     <div class="row">
         {% for object in object_list %}
             <div class="col">
-                {{ forloop.counter }}
                 {% include 'shop/snippets/card.html' %}
                 {% if forloop.counter|divisibleby:3 %}
                     </div></div>

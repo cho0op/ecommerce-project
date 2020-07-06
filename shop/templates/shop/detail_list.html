@@ -7,7 +7,7 @@
             {{ object.description|linebreaks }}
             <br>
             {% if object.image %}
-                <img src="{{ object.image.url }}" class="image-thumbnail" alt='{{ object.slug }}'>
+                <img src="{{ object.image.url }}" class="image-thumbnail" alt='{{ object.slug }}' style="height: 10rem">
             {% endif %}
         </div>
         <div class="col-4 md-col-12">

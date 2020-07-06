@@ -6,6 +6,7 @@ from django.utils.http import is_safe_url
 from .models import GuestEmail
 from .signals import user_logged_in
 
+
 def guest_register_view(request):
     form = GuestForm(request.POST or None)
     next_ = request.GET.get('next')
@@ -26,6 +27,7 @@ class LoginView(FormView):
     form_class = LoginForm
     success_url = '/'
     template_name = 'accounts/login.html'
+
     def form_valid(self, form):
         request = self.request
         next_ = request.GET.get('next')
@@ -36,7 +38,7 @@ class LoginView(FormView):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            user_logged_in.send(user.__class__,instance=user, request=request)
+            user_logged_in.send(user.__class__, instance=user, request=request)
             try:
                 del request.session['guest_email_id']
             except:
@@ -46,8 +48,6 @@ class LoginView(FormView):
             else:
                 return redirect("home")
         return super(LoginView, self).form_invalid(form)
-
-
 
 
 User = get_user_model()

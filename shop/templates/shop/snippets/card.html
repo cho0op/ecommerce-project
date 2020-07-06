@@ -1,12 +1,12 @@
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem; height: 30rem ">
     {% if object.image %}
-        <a href="{% url 'products:detail' slug=object.slug%}">
-            <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap">
+        <a href="{% url 'products:detail' slug=object.slug%}" style="height:60%;">
+            <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap" >
         </a>
     {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{ object.title }}</h5>
     <p class="card-text">{{ object.description|truncatewords:12}}</p>
-    <a href="{% url 'products:detail' slug=object.slug %}" class="btn btn-primary">Go somewhere</a>
+    <a href="{% url 'products:detail' slug=object.slug %}" class="btn btn-primary">Details</a>
   </div>
 </div>
