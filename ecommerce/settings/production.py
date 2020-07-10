@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'qa4=j639_62$lqyy5$nv73zyf5)()8veqtcwb_nt)#fjjos_7^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [".herokuapp.com"]
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
+    'storages',
     'shop',
     'search',
     'tags',
@@ -100,6 +101,7 @@ DATABASES = {
 }
 
 import dj_database_url
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
@@ -144,7 +146,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-SECRET_ROOT = os.path.join(BASE_DIR, 'static')
+from ecommerce.aws.conf import *
+
 
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"

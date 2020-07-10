@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
+    'storages',
     'shop',
     'search',
     'tags',
@@ -150,3 +151,8 @@ CSRF_COOKIE_SECURE = False
 SECURE_HSTS_SECONDS = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
+
+AWS_GROUP_NAME = "ecommerce_group"
+AWS_USERNAME = "artem-ecommerce"
+AWS_ACCESS_KEY_ID = "AKIAZGB3XA7NMBB77KRK"
+AWS_SECRET_ACCESS_KEY = "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"
