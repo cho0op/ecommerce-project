@@ -19,7 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qa4=j639_62$lqyy5$nv73zyf5)()8veqtcwb_nt)#fjjos_7^'
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa")
+STRIPE_PUB_KEY = os.environ.get("STRIPE_PUB_KEY", "pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -51,9 +52,9 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'accounts.User'  # changes built-in auth model on our custom
 
-MAILCHIMP_API_KEY = "9272cfbe6ac9d5662f9f734c8c6603bd-us10"
+MAILCHIMP_API_KEY = os.environ.get("MAILCHIMP_API_KEY")
 MAILCHIMP_DATA_CENTER = "us10"
-MAILCHIMP_EMAIL_LIST_ID = "669b69440a"
+MAILCHIMP_EMAIL_LIST_ID = os.environ.get("MAILCHIMP_EMAIL_LIST_ID")
 
 STRIPE_SECRET_KEY = "sk_test_uAMQwOWADa01RqYBsCucGkhF00rOxC8nDa"
 STRIPE_PUB_KEY = "pk_test_1qDV1Bm7yRQqOGJhUwWdVN9F001dQvT4Ir"
