@@ -1,10 +1,23 @@
 from django.shortcuts import render, redirect
 from accounts.forms import LoginForm, RegisterForm, GuestForm
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, DetailView
 from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.http import is_safe_url
 from .models import GuestEmail
 from .signals import user_logged_in
+
+
+# @login_required
+# def account_home_view(request):
+#     return render(request, 'accounts/home.html')
+
+class AccountsHome(LoginRequiredMixin, DetailView):
+    template_name = 'accounts/home.html'
+    def get_object(self, queryset=None):
+        return self.request.user
+
 
 
 def guest_register_view(request):

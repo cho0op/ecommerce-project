@@ -18,7 +18,7 @@ from django.urls import path, include
 from shop import views
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from accounts.views import RegisterView, LoginView, guest_register_view
 from django.contrib.auth.views import LogoutView
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
@@ -37,6 +37,8 @@ urlpatterns = [
     path('checkout/address/create/', checkout_address_create_view, name='checkout_address_create'),
     path('checkout/address/reuse/', checkout_address_reuse_view, name='checkout_address_reuse'),
     path('contact/', views.contact_page, name="contacts"),
+    path('accounts/', RedirectView.as_view(url='/account/')),
+    path('account/', include('accounts.urls', namespace='accounts')),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('register/', RegisterView.as_view(), name="register"),
