@@ -54,6 +54,7 @@ def cart_update(request):
                 "added": added,
                 "cartItemCount": cart_obj.products.count(),
             }
+            print(json_data)
             return JsonResponse(json_data)
     return redirect('carts:home')
 

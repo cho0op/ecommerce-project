@@ -6,6 +6,8 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 from carts.models import Cart
 from analytics.signals import object_viewed_signal
+
+
 # from analytics.mixins import ObjectViewedMixin
 
 
@@ -29,12 +31,12 @@ class ProductDetailSlugView(DetailView):
     model = Product
     template_name = 'shop/detail_list.html'
 
-    # def get_context_data(self, **kwargs):
-    #     request = self.request
-    #     context = super(ProductDetailSlugView, self).get_context_data()
-    #     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    #     context['cart'] = cart_obj
-    #     return context
+    def get_context_data(self, **kwargs):
+        request = self.request
+        context = super(ProductDetailSlugView, self).get_context_data()
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        context['cart'] = cart_obj
+        return context
 
     def get_object(self, *args, **kwargs):
         request = self.request
@@ -46,25 +48,24 @@ class ProductDetailSlugView(DetailView):
         except Product.MultipleObjectsReturned:
             qs = Product.objects.filter(slug=slug, active=True)
             instance = qs.first()
-        # object_viewed_signal.send(instance.__class__, instance=instance, request=request)
         return instance
 
 
-class ProductDetailView(DetailView):
-    queryset = Product.objects.all()
-    template_name = 'shop/detail_list.html'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(**kwargs)
-        print(context)
-        return context
-    # def get_object(self):
-    #     request = self.request
-    #     product_id = self.kwargs.get('product_id')
-    #     instance = Product.objects.get_by_id(product_id)
-    #     if instance is None:
-    #         raise Http404("product doesn't exist")
-    #     return instance
+# class ProductDetailView(DetailView):
+#     queryset = Product.objects.all()
+#     template_name = 'shop/detail_list.html'
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super(ProductDetailView, self).get_context_data(**kwargs)
+#         print(context)
+#         return context
+#     def get_object(self):
+#         request = self.request
+#         product_id = self.kwargs.get('product_id')
+#         instance = Product.objects.get_by_id(product_id)
+#         if instance is None:
+#             raise Http404("product doesn't exist")
+#         return instance
 
 
 def product_detail_view(request, product_id):
