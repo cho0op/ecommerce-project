@@ -14,6 +14,13 @@ from analytics.signals import object_viewed_signal
 class ProductListView(ListView):
     queryset = Product.objects.all()
     template_name = 'shop/product_list.html'
+
+    def get_context_data(self, **kwargs):
+        request = self.request
+        context = super(ProductListView, self).get_context_data()
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        context['cart'] = cart_obj
+        return context
     # def get_context_data(self, *, object_list=None, **kwargs):
     #     context = super(ProductListView, self).get_context_data(**kwargs)
     #     return context

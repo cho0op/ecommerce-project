@@ -8,6 +8,13 @@
         <h5 class="card-title">{{ object.title }}</h5>
         <h5 class="card-title">{{ object.price }} $</h5>
         <p class="card-text">{{ object.description|truncatewords:12 }}</p>
-        <a href="{% url 'products:detail' slug=object.slug %}" class="btn btn-primary">Details</a>
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'products:detail' slug=object.slug %}" class="btn btn-primary">Details</a>
+            </div>
+            <div class="col-6">
+                {% include 'shop/snippets/update_card.html' with product=object cart=cart %}
+            </div>
+        </div>
     </div>
 </div>
