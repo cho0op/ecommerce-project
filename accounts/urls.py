@@ -5,4 +5,5 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('home/', views.AccountsHome.as_view(), name='home')
+
 ]

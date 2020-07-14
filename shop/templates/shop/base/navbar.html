@@ -48,9 +48,12 @@
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item {% if request.path == account_home_url %} active {% endif %}" href="{{ account_home_url }}">Home</a>
+                            <a class="dropdown-item {% if request.path == account_home_url %} active {% endif %}"
+                               href="{{ account_home_url }}">Home</a>
+                            <a class="dropdown-item">Billing</a>
+                            <a class="dropdown-item">Preferences</a>
+                            <a class="dropdown-item">History</a>
                             <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
-
                         </div>
                     </li>
                 {% else %}
