@@ -31,4 +31,4 @@ smmap==3.0.4
 smmap2==3.0.1
 sqlparse==0.3.1
 stripe==2.48.0
-urllib3==1.25.9
+urllib3==1.26.5
